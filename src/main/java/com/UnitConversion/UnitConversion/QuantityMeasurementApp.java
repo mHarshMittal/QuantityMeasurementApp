@@ -4,31 +4,23 @@ public class QuantityMeasurementApp {
 
     public static void main(String[] args) {
 
-        QuantityLength l1 = new QuantityLength(1.0, LengthUnit.FEET);
-        QuantityLength l2 = new QuantityLength(12.0, LengthUnit.INCHES);
+        QuantityLength q1 = new QuantityLength(1.0, LengthUnit.FEET);
+        QuantityLength q2 = new QuantityLength(12.0, LengthUnit.INCHES);
 
-        QuantityLength r1 = QuantityLength.add(l1, l2, LengthUnit.FEET);
-        System.out.println(r1);
+        QuantityLength result = QuantityLength.add(q1, q2, LengthUnit.FEET);
+        System.out.println(result);
 
-        QuantityLength r2 = QuantityLength.add(l1, l2, LengthUnit.INCHES);
-        System.out.println(r2);
+        QuantityLength length = new QuantityLength(2, LengthUnit.YARDS);
+        QuantityLength converted = length.convertTo(LengthUnit.FEET);
 
-        QuantityLength r3 = QuantityLength.add(l1, l2, LengthUnit.YARDS);
-        System.out.println(r3);
+        System.out.println(length + " = " + converted);
 
-        QuantityLength a = new QuantityLength(1.0, LengthUnit.YARDS);
-        QuantityLength b = new QuantityLength(3.0, LengthUnit.FEET);
+        QuantityLength l1 = new QuantityLength(3, LengthUnit.FEET);
+        QuantityLength l2 = new QuantityLength(36, LengthUnit.INCHES);
 
-        System.out.println(QuantityLength.add(a, b, LengthUnit.YARDS));
+        System.out.println("Equal? " + l1.equals(l2));
 
-        QuantityLength c = new QuantityLength(36.0, LengthUnit.INCHES);
-        QuantityLength d = new QuantityLength(1.0, LengthUnit.YARDS);
-
-        System.out.println(QuantityLength.add(c, d, LengthUnit.FEET));
-
-        QuantityLength e = new QuantityLength(2.54, LengthUnit.CENTIMETERS);
-        QuantityLength f = new QuantityLength(1.0, LengthUnit.INCHES);
-
-        System.out.println(QuantityLength.add(e, f, LengthUnit.CENTIMETERS));
+        double base = LengthUnit.INCHES.convertToBaseUnit(12);
+        System.out.println("12 inches in feet = " + base);
     }
 }

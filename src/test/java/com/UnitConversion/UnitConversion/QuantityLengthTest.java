@@ -219,6 +219,38 @@ public class QuantityLengthTest {
 
         assertEquals(0.666666, QuantityLength.convert(24.0, LengthUnit.INCHES, LengthUnit.YARDS), EPSILON);
     }
+    
+    
+    
+    @Test
+    public void testLengthUnitEnum_FeetConstant() {
+        assertEquals(1.0, LengthUnit.FEET.getConversionFactor(), 0.0001);
+    }
+
+    @Test
+    public void testLengthUnitEnum_InchesConstant() {
+        assertEquals(1.0/12.0, LengthUnit.INCHES.getConversionFactor(), 0.0001);
+    }
+
+    @Test
+    public void testLengthUnitEnum_YardsConstant() {
+        assertEquals(3.0, LengthUnit.YARDS.getConversionFactor(), 0.0001);
+    }
+
+    @Test
+    public void testLengthUnitEnum_CentimetersConstant() {
+        assertEquals(1.0/30.48, LengthUnit.CENTIMETERS.getConversionFactor(), 0.0001);
+    }
+
+    @Test
+    public void testConvertToBaseUnit_InchesToFeet() {
+        assertEquals(1.0, LengthUnit.INCHES.convertToBaseUnit(12.0), 0.0001);
+    }
+
+    @Test
+    public void testConvertFromBaseUnit_FeetToInches() {
+        assertEquals(12.0, LengthUnit.INCHES.convertFromBaseUnit(1.0), 0.0001);
+    }
 }
 
 

@@ -19,8 +19,8 @@ public class QuantityLength {
             throw new IllegalArgumentException("Invalid input");
         }
 
-        double baseValue = value * from.getFactor();
-        return baseValue / to.getFactor();
+        double baseValue = from.convertToBaseUnit(value);
+        return to.convertFromBaseUnit(baseValue);
     }
 
     public QuantityLength convertTo(LengthUnit targetUnit) {
@@ -28,14 +28,10 @@ public class QuantityLength {
         return new QuantityLength(convertedValue, targetUnit);
     }
 
-    // UC7 Addition with explicit target unit
+    // UC7 addition with explicit target unit
     public static QuantityLength add(QuantityLength l1, QuantityLength l2, LengthUnit targetUnit) {
 
         if (l1 == null || l2 == null || targetUnit == null) {
-            throw new IllegalArgumentException("Invalid input");
-        }
-
-        if (!Double.isFinite(l1.value) || !Double.isFinite(l2.value)) {
             throw new IllegalArgumentException("Invalid input");
         }
 
@@ -44,15 +40,15 @@ public class QuantityLength {
         return new QuantityLength(result, targetUnit);
     }
 
-    // private utility method
+    // private utility addition method
     private static double addBase(QuantityLength l1, QuantityLength l2, LengthUnit targetUnit) {
 
-        double v1 = l1.value * l1.unit.getFactor();
-        double v2 = l2.value * l2.unit.getFactor();
+        double v1 = l1.unit.convertToBaseUnit(l1.value);
+        double v2 = l2.unit.convertToBaseUnit(l2.value);
 
-        double sumFeet = v1 + v2;
+        double sumBase = v1 + v2;
 
-        return sumFeet / targetUnit.getFactor();
+        return targetUnit.convertFromBaseUnit(sumBase);
     }
 
     @Override
@@ -67,9 +63,9 @@ public class QuantityLength {
 
         QuantityLength other = (QuantityLength) obj;
 
-        double thisFeet = this.value * this.unit.getFactor();
-        double otherFeet = other.value * other.unit.getFactor();
+        double thisBase = this.unit.convertToBaseUnit(this.value);
+        double otherBase = other.unit.convertToBaseUnit(other.value);
 
-        return thisFeet == otherFeet;
+        return thisBase == otherBase;
     }
 }
