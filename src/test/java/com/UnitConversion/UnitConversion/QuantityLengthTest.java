@@ -251,6 +251,58 @@ public class QuantityLengthTest {
     public void testConvertFromBaseUnit_FeetToInches() {
         assertEquals(12.0, LengthUnit.INCHES.convertFromBaseUnit(1.0), 0.0001);
     }
+    
+    
+    @Test
+    void testEquality_KgToGram() {
+
+        QuantityWeight a = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
+        QuantityWeight b = new QuantityWeight(1000.0, WeightUnit.GRAM);
+
+        assertTrue(a.equals(b));
+    }
+
+    @Test
+    void testConversion_KgToGram() {
+
+        QuantityWeight q = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
+
+        QuantityWeight result = q.convertTo(WeightUnit.GRAM);
+
+        assertEquals(1000.0, result.getValue(), 1e-6);
+    }
+
+    @Test
+    void testConversion_PoundToKg() {
+
+        QuantityWeight q = new QuantityWeight(2.0, WeightUnit.POUND);
+
+        QuantityWeight result = q.convertTo(WeightUnit.KILOGRAM);
+
+        assertEquals(0.907184, result.getValue(), 1e-6);
+    }
+
+    @Test
+    void testAddition_KgAndGram() {
+
+        QuantityWeight a = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
+        QuantityWeight b = new QuantityWeight(1000.0, WeightUnit.GRAM);
+
+        QuantityWeight result = QuantityWeight.add(a, b);
+
+        assertEquals(2.0, result.getValue(), 1e-6);
+    }
+
+    @Test
+    void testAddition_WithTargetUnit() {
+
+        QuantityWeight a = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
+        QuantityWeight b = new QuantityWeight(1000.0, WeightUnit.GRAM);
+
+        QuantityWeight result = QuantityWeight.add(a, b, WeightUnit.GRAM);
+
+        assertEquals(2000.0, result.getValue(), 1e-6);
+    }
 }
 
 
