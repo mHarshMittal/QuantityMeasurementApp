@@ -1,4 +1,4 @@
-package com.EqualityMearsurement;
+package com.InchMearsurement.InchMeasurement;
 
 /**
  * Hello world!
