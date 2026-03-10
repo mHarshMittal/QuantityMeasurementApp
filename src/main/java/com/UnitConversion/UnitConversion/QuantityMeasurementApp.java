@@ -4,39 +4,28 @@ public class QuantityMeasurementApp {
 
     public static void main(String[] args) {
 
-        // Length Example
-        Quantity<LengthUnit> q1 = new Quantity<>(1.0, LengthUnit.FEET);
-        Quantity<LengthUnit> q2 = new Quantity<>(12.0, LengthUnit.INCHES);
+        Quantity<LengthUnit> l1 = new Quantity<>(1, LengthUnit.FEET);
+        Quantity<LengthUnit> l2 = new Quantity<>(12, LengthUnit.INCHES);
 
-        Quantity<LengthUnit> result = q1.add(q2, LengthUnit.FEET);
-        System.out.println(result);
+        System.out.println("Length equal: " + l1.equals(l2));
 
-        Quantity<LengthUnit> length = new Quantity<>(2, LengthUnit.YARDS);
-        Quantity<LengthUnit> converted = length.convertTo(LengthUnit.FEET);
+        Quantity<LengthUnit> sum = l1.add(l2);
+        System.out.println("Length add: " + sum);
 
-        System.out.println(length + " = " + converted);
+        // Temperature Example
 
-        Quantity<LengthUnit> l1 = new Quantity<>(3, LengthUnit.FEET);
-        Quantity<LengthUnit> l2 = new Quantity<>(36, LengthUnit.INCHES);
+        Quantity<TempratureUnit> t1 = new Quantity<>(0.0, TempratureUnit.CELSIUS);
+        Quantity<TempratureUnit> t2 = new Quantity<>(32.0, TempratureUnit.FAHRENHEIT);
 
-        System.out.println("Equal? " + l1.equals(l2));
+        System.out.println("Temperature equal: " + t1.equals(t2));
 
-        // Weight Example
-        Quantity<WeightUnit> w1 = new Quantity<>(1.0, WeightUnit.KILOGRAM);
-        Quantity<WeightUnit> w2 = new Quantity<>(1000.0, WeightUnit.GRAM);
+        Quantity<TempratureUnit> converted = t1.convertTo(TempratureUnit.FAHRENHEIT);
+        System.out.println("Converted temp: " + converted);
 
-        System.out.println("Weight equal? " + w1.equals(w2));
-
-        Quantity<WeightUnit> weightSum = w1.add(w2, WeightUnit.KILOGRAM);
-        System.out.println("Weight Sum: " + weightSum);
-
-        // Volume Example
-        Quantity<VolumeUnit> v1 = new Quantity<>(1.0, VolumeUnit.LITRE);
-        Quantity<VolumeUnit> v2 = new Quantity<>(1000.0, VolumeUnit.MILLILITRE);
-
-        System.out.println("Volume equal? " + v1.equals(v2));
-
-        Quantity<VolumeUnit> volumeSum = v1.add(v2, VolumeUnit.LITRE);
-        System.out.println("Volume Sum: " + volumeSum);
+        try {
+            t1.add(t2);
+        } catch (UnsupportedOperationException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

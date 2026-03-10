@@ -339,4 +339,41 @@ public class QuantityLengthTest {
         assertEquals(10.0, result.getValue(), EPSILON);
     }
 
+    // ---------- UC14 Temperature Tests ----------
+
+    @Test
+    void testTemperatureEquality_CelsiusToFahrenheit() {
+
+        Quantity<TempratureUnit> c = new Quantity<>(0.0, TempratureUnit.CELSIUS);
+        Quantity<TempratureUnit> f = new Quantity<>(32.0, TempratureUnit.FAHRENHEIT);
+
+        assertTrue(c.equals(f));
+    }
+
+    @Test
+    void testTemperatureConversion_CelsiusToKelvin() {
+
+        Quantity<TempratureUnit> c = new Quantity<>(0.0, TempratureUnit.CELSIUS);
+        Quantity<TempratureUnit> result = c.convertTo(TempratureUnit.KELVIN);
+
+        assertEquals(273.15, result.getValue(), EPSILON);
+    }
+
+    @Test
+    void testTemperatureAddition_NotAllowed() {
+
+        Quantity<TempratureUnit> t1 = new Quantity<>(10.0, TempratureUnit.CELSIUS);
+        Quantity<TempratureUnit> t2 = new Quantity<>(5.0, TempratureUnit.CELSIUS);
+
+        assertThrows(UnsupportedOperationException.class, () -> t1.add(t2));
+    }
+
+    @Test
+    void testTemperatureDivision_NotAllowed() {
+
+        Quantity<TempratureUnit> t1 = new Quantity<>(20.0, TempratureUnit.CELSIUS);
+        Quantity<TempratureUnit> t2 = new Quantity<>(10.0, TempratureUnit.CELSIUS);
+
+        assertThrows(UnsupportedOperationException.class, () -> t1.divide(t2));
+    }
 }
