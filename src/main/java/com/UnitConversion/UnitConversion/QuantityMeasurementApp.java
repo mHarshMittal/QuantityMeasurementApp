@@ -9,7 +9,8 @@ public class QuantityMeasurementApp {
         Quantity<LengthUnit> q1 = new Quantity<>(1.0, LengthUnit.FEET);
         Quantity<LengthUnit> q2 = new Quantity<>(12.0, LengthUnit.INCHES);
 
-        Quantity<LengthUnit> result = Quantity.add(q1, q2, LengthUnit.FEET);
+        
+        Quantity<LengthUnit> result = q1.add(q2, LengthUnit.FEET);
         System.out.println("Length Addition: " + result);
 
         Quantity<LengthUnit> length = new Quantity<>(2, LengthUnit.YARDS);
@@ -33,7 +34,8 @@ public class QuantityMeasurementApp {
 
         System.out.println("Weight Equal? " + w1.equals(w2));
 
-        Quantity<WeightUnit> weightSum = Quantity.add(w1, w2, WeightUnit.KILOGRAM);
+        Quantity<WeightUnit> weightSum = w1.add(w2, WeightUnit.KILOGRAM);
+        
         System.out.println("Weight Sum: " + weightSum);
 
 
@@ -51,10 +53,10 @@ public class QuantityMeasurementApp {
         Quantity<VolumeUnit> gallonToLitre = v3.convertTo(VolumeUnit.LITRE);
         System.out.println(v3 + " = " + gallonToLitre);
 
-        Quantity<VolumeUnit> volumeSum1 = Quantity.add(v1, v2, VolumeUnit.LITRE);
+        Quantity<VolumeUnit> volumeSum1 = v1.add(v2, VolumeUnit.LITRE);
         System.out.println("Volume Sum (Litre): " + volumeSum1);
 
-        Quantity<VolumeUnit> volumeSum2 = Quantity.add(v1, v3, VolumeUnit.MILLILITRE);
+        Quantity<VolumeUnit> volumeSum2 = v1.add(v3, VolumeUnit.MILLILITRE);
         System.out.println("Volume Sum (Millilitre): " + volumeSum2);
 
 
