@@ -376,4 +376,56 @@ public class QuantityLengthTest {
 
         assertThrows(UnsupportedOperationException.class, () -> t1.divide(t2));
     }
+    
+    @Test
+    void given1FeetAnd12Inches_ShouldReturnTrue_WhenCompared() {
+
+        Quantity<LengthUnit> q1 = new Quantity<>(1, LengthUnit.FEET);
+        Quantity<LengthUnit> q2 = new Quantity<>(12, LengthUnit.INCHES);
+
+        assertEquals(q1, q2);
+    }
+
+    @Test
+    void given1FeetAnd2Feet_ShouldReturn3Feet_WhenAdded() {
+
+        Quantity<LengthUnit> q1 = new Quantity<>(1, LengthUnit.FEET);
+        Quantity<LengthUnit> q2 = new Quantity<>(2, LengthUnit.FEET);
+
+        Quantity<LengthUnit> result = q1.add(q2);
+
+        assertEquals(new Quantity<>(3, LengthUnit.FEET), result);
+    }
+
+    @Test
+    void given1Feet_ShouldConvertTo12Inches() {
+
+        Quantity<LengthUnit> q = new Quantity<>(1, LengthUnit.FEET);
+
+        Quantity<LengthUnit> result = q.convertTo(LengthUnit.INCHES);
+
+        assertEquals(new Quantity<>(12, LengthUnit.INCHES), result);
+    }
+
+    @Test
+    void given2InchesAnd2Inches_ShouldReturn4Inches_WhenAdded() {
+
+        Quantity<LengthUnit> q1 = new Quantity<>(2, LengthUnit.INCHES);
+        Quantity<LengthUnit> q2 = new Quantity<>(2, LengthUnit.INCHES);
+
+        Quantity<LengthUnit> result = q1.add(q2);
+
+        assertEquals(new Quantity<>(4, LengthUnit.INCHES), result);
+    }
+
+    @Test
+    void givenDifferentMeasurements_ShouldThrowException() {
+
+        Quantity<LengthUnit> q1 = new Quantity<>(1, LengthUnit.FEET);
+        Quantity<VolumeUnit> q2 = new Quantity<>(1, VolumeUnit.LITRE);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            q1.add((Quantity) q2);
+        });
+    }
 }
