@@ -2,15 +2,17 @@ package com.UnitConversion.UnitConversion;
 
 import com.UnitConversion.UnitConversion.controller.QuantityMeasurementController;
 import com.UnitConversion.UnitConversion.entity.QuantityDTO;
+import com.UnitConversion.UnitConversion.repository.IQuantityMeasurementRepository;
 import com.UnitConversion.UnitConversion.repository.QuantityMeasurementCacheRepository;
+import com.UnitConversion.UnitConversion.repository.QuantityMeasurementDatabaseRepository;
 import com.UnitConversion.UnitConversion.service.QuantityMeasurementServiceImpl;
 
 public class App {
 
     public static void main(String[] args) {
 
-        QuantityMeasurementCacheRepository repo =
-                QuantityMeasurementCacheRepository.getInstance();
+    	IQuantityMeasurementRepository repo =
+    	        new QuantityMeasurementDatabaseRepository();
 
         QuantityMeasurementServiceImpl service =
                 new QuantityMeasurementServiceImpl(repo);

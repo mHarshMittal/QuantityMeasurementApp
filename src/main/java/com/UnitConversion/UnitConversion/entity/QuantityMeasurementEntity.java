@@ -21,4 +21,24 @@ public class QuantityMeasurementEntity {
     public String getResult() {
         return result;
     }
+
+	public double getValue() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public String getUnit() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getMeasurementType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public double getValue1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
