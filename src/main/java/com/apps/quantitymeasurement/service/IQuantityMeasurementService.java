@@ -6,19 +6,20 @@ import com.apps.quantitymeasurement.entity.QuantityMeasurementEntity;
 import java.util.List;
 
 public interface IQuantityMeasurementService {
-	QuantityMeasurementEntity compare(QuantityInputDTO input);
 
-	QuantityMeasurementEntity convert(QuantityInputDTO input);
+    QuantityMeasurementEntity compare(Long userId, QuantityInputDTO input);
 
-	QuantityMeasurementEntity add(QuantityInputDTO input);
+    QuantityMeasurementEntity convert(Long userId, QuantityInputDTO input);
 
-	QuantityMeasurementEntity subtract(QuantityInputDTO input);
+    QuantityMeasurementEntity add(Long userId, QuantityInputDTO input);
 
-	QuantityMeasurementEntity divide(QuantityInputDTO input);
+    QuantityMeasurementEntity subtract(Long userId, QuantityInputDTO input);
 
-	List<QuantityMeasurementEntity> getHistory();
+    QuantityMeasurementEntity divide(Long userId, QuantityInputDTO input);
 
-	List<QuantityMeasurementEntity> getHistoryByOperation(String operation);
+    List<QuantityMeasurementEntity> getHistory();
 
-	long getOperationCount(String operation);
+    List<QuantityMeasurementEntity> getHistoryByOperation(String operation);
+
+    long getOperationCount(String operation);
 }

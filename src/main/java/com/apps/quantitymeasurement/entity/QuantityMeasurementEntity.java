@@ -12,31 +12,35 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class QuantityMeasurementEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private Double thisValue;
-	private String thisUnit;
-	private String thisMeasurementType;
+    private Double thisValue;
+    private String thisUnit;
+    private String thisMeasurementType;
 
-	private Double thatValue;
-	private String thatUnit;
-	private String thatMeasurementType;
+    private Double thatValue;
+    private String thatUnit;
+    private String thatMeasurementType;
 
-	private String operation;
+    private String operation;
 
-	private Double resultValue;
-	private String resultUnit;
-	private String resultString;
+    private Double resultValue;
+    private String resultUnit;
+    private String resultString;
 
-	private boolean error;
-	private String errorMessage;
+    private boolean error;
+    private String errorMessage;
 
-	private LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
-	@PrePersist
-	public void prePersist() {
-		createdAt = LocalDateTime.now();
-	}
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @PrePersist
+    public void prePersist() {
+        createdAt = LocalDateTime.now();
+    }
 }
