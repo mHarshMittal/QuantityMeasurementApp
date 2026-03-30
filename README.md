@@ -70,3 +70,11 @@
 - **UC-16** → feature/UC16-DatabaseIntegration
   
   Integrated database using JDBC for data persistence  
+
+- **UC-17** → feature/UC17-SpringIntegration
+    - Converted Project to Spring Boot
+
+
+- **UC-18** → feature/UC18-Authentication
+  
+  - Added JWT with Spring Security
