@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04917ebe-1e99-4e6d-9277-1e2d04b4e1cb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/com/apps/quantitymeasurement/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/com/apps/quantitymeasurement/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/security/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/security/JwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/security/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/security/CustomUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/controller/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/security/CustomUserDetailsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/security/CustomUserDetailsService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +99,7 @@
       <workItem from="1774345820349" duration="495000" />
       <workItem from="1774346363754" duration="5597000" />
       <workItem from="1774415571838" duration="1985000" />
-      <workItem from="1774847153282" duration="5681000" />
+      <workItem from="1774847153282" duration="9973000" />
     </task>
     <servers />
   </component>
