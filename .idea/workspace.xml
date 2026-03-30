@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04917ebe-1e99-4e6d-9277-1e2d04b4e1cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +46,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.QuantityMeasurementAppApplication.executor": "Run",
-    "git-widget-placeholder": "Merging feature/UC18-Authnetication",
+    "git-widget-placeholder": "feature/UC18-Authnetication",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "F:/QuantityMeasurementApp",
@@ -93,7 +90,7 @@
       <workItem from="1774345820349" duration="495000" />
       <workItem from="1774346363754" duration="5597000" />
       <workItem from="1774415571838" duration="1985000" />
-      <workItem from="1774847153282" duration="2622000" />
+      <workItem from="1774847153282" duration="3071000" />
     </task>
     <servers />
   </component>
