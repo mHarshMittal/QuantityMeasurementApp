@@ -1,9 +1,11 @@
 package com.apps.quantitymeasurement.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "users")
+@Data
 public class User {
 
     @Id
@@ -11,31 +13,11 @@ public class User {
     private Long id;
 
     private String name;
+
+    @Column(unique = true)
     private String email;
 
-    public User() {}
+    private String password;
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    private String role = "USER";
 }
