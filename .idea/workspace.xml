@@ -5,61 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04917ebe-1e99-4e6d-9277-1e2d04b4e1cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/QuantityMeasurementAppApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/com/apps/quantitymeasurement/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/controller/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/controller/QuantityMeasurementController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/dto/QuantityDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/dto/QuantityInputDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/entity/QuantityMeasurementEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/exception/QuantityMeasurementException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/model/QuantityModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/repository/QuantityMeasurementRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/security/CustomUserDetailsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/security/JwtFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/security/JwtUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/service/IQuantityMeasurementService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/service/QuantityMeasurementServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/unit/IMeasurable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/unit/LengthUnit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/unit/TemperatureUnit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/unit/VolumeUnit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/unit/WeightUnit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/apps/quantitymeasurement/QuantityMeasurementAppApplicationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/QuantityMeasurementAppApplication.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/config/SecurityConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/controller/AuthController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/controller/QuantityMeasurementController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/dto/QuantityDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/dto/QuantityInputDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/entity/QuantityMeasurementEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/entity/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/exception/GlobalExceptionHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/exception/QuantityMeasurementException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/model/QuantityModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/repository/QuantityMeasurementRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/repository/UserRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/security/CustomUserDetailsService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/security/JwtFilter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/security/JwtUtil.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/service/IQuantityMeasurementService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/service/QuantityMeasurementServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/unit/IMeasurable.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/unit/LengthUnit.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/unit/TemperatureUnit$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/unit/TemperatureUnit$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/unit/TemperatureUnit.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/unit/VolumeUnit.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/unit/WeightUnit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/com/apps/quantitymeasurement/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/config/SecurityConfig.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +39,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Notification.DisplayName-DoNotAsk-DatabaseConfigFileWatcher.found": "New/updated database configurations found",
     "Notification.DoNotAsk-DatabaseConfigFileWatcher.found": "true",
     "RequestMappingsPanelOrder0": "0",
@@ -100,7 +50,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.QuantityMeasurementAppApplication.executor": "Run",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "F:/QuantityMeasurementApp",
@@ -145,6 +95,7 @@
       <workItem from="1774346363754" duration="5597000" />
       <workItem from="1774415571838" duration="1985000" />
       <workItem from="1774847153282" duration="2248000" />
+      <workItem from="1775120759280" duration="4590000" />
     </task>
     <servers />
   </component>
