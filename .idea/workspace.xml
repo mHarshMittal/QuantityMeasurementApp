@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
-    <list default="true" id="04917ebe-1e99-4e6d-9277-1e2d04b4e1cb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/com/apps/quantitymeasurement/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/com/apps/quantitymeasurement/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/security/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/apps/quantitymeasurement/security/CustomUserDetailsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/config/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/controller/AuthController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/entity/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/security/CustomUserDetailsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/apps/quantitymeasurement/security/CustomUserDetailsService.class" afterDir="false" />
-    </list>
-=======
     <list default="true" id="04917ebe-1e99-4e6d-9277-1e2d04b4e1cb" name="Changes" comment="" />
->>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,10 +37,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-<<<<<<< Updated upstream
-=======
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
->>>>>>> Stashed changes
     &quot;Notification.DisplayName-DoNotAsk-DatabaseConfigFileWatcher.found&quot;: &quot;New/updated database configurations found&quot;,
     &quot;Notification.DoNotAsk-DatabaseConfigFileWatcher.found&quot;: &quot;true&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
@@ -66,17 +48,10 @@
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;Spring Boot.QuantityMeasurementAppApplication.executor&quot;: &quot;Run&quot;,
-<<<<<<< Updated upstream
-    &quot;git-widget-placeholder&quot;: &quot;feature/UC18-Authnetication&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/QuantityMeasurementApp&quot;,
-=======
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/harsh mittal/Desktop/QMA/QuantityMeasurementApp&quot;,
->>>>>>> Stashed changes
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -128,19 +103,11 @@
       <workItem from="1774345820349" duration="495000" />
       <workItem from="1774346363754" duration="5597000" />
       <workItem from="1774415571838" duration="1985000" />
-<<<<<<< Updated upstream
-      <workItem from="1774847153282" duration="9973000" />
-=======
       <workItem from="1774847153282" duration="2248000" />
       <workItem from="1775120759280" duration="4590000" />
       <workItem from="1775131926120" duration="716000" />
       <workItem from="1775194036748" duration="5365000" />
       <workItem from="1775453182452" duration="2459000" />
-      <workItem from="1775458653251" duration="32000" />
-      <workItem from="1775458960740" duration="10000" />
-      <workItem from="1775459862678" duration="29000" />
-      <workItem from="1775470874468" duration="789000" />
->>>>>>> Stashed changes
     </task>
     <servers />
   </component>
