@@ -9,9 +9,13 @@ import java.util.List;
 @Repository
 public interface QuantityMeasurementRepository extends JpaRepository<QuantityMeasurementEntity, Long> {
 
-	List<QuantityMeasurementEntity> findByOperation(String operation);
+    List<QuantityMeasurementEntity> findByOperation(String operation);
 
-	long countByOperationAndErrorFalse(String operation);
+    long countByOperationAndErrorFalse(String operation);
 
-	List<QuantityMeasurementEntity> findByErrorTrue();
+    List<QuantityMeasurementEntity> findByErrorTrue();
+
+    List<QuantityMeasurementEntity> findByUserEmail(String email);
+
+    void deleteByUserEmail(String email);
 }

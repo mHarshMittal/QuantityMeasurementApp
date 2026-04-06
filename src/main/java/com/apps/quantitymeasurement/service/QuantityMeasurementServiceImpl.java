@@ -210,8 +210,44 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
     }
 
     @Override
+    public QuantityMeasurementEntity multiply(Long userId, QuantityInputDTO input) {
+        QuantityMeasurementEntity entity = new QuantityMeasurementEntity();
+        entity.setUser(getUser(userId));
+        try {
+            QuantityDTO q1 = input.getThisQuantityDTO();
+            QuantityDTO q2 = input.getThatQuantityDTO();
+
+            IMeasurable unit1 = getUnit(q1.getMeasurementType(), q1.getUnit());
+
+            if (!unit1.supportsArithmetic()) {
+                throw new QuantityMeasurementException("Arithmetic not supported for this unit");
+            }
+
+            double base1 = unit1.convertToBaseUnit(q1.getValue());
+            double scalar = q2.getValue(); // treat second quantity value as scalar multiplier
+            double result = unit1.convertFromBaseUnit(base1 * scalar);
+
+            setCommonFields(entity, input);
+            entity.setOperation("MULTIPLY");
+            entity.setResultValue(result);
+            entity.setResultUnit(q1.getUnit());
+        } catch (Exception e) {
+            entity.setError(true);
+            entity.setErrorMessage(e.getMessage());
+            entity.setOperation("MULTIPLY");
+            entity.setCreatedAt(LocalDateTime.now());
+        }
+        return repository.save(entity);
+    }
+
+    @Override
     public List<QuantityMeasurementEntity> getHistory() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<QuantityMeasurementEntity> getHistoryByEmail(String email) {
+        return repository.findByUserEmail(email);
     }
 
     @Override
@@ -222,5 +258,20 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
     @Override
     public long getOperationCount(String operation) {
         return repository.countByOperationAndErrorFalse(operation.toUpperCase());
+    }
+
+    @Override
+    public void deleteRecord(Long id) {
+        repository.deleteById(id);
+    }
+
+    @Override
+    public void deleteAllByEmail(String email) {
+        repository.deleteByUserEmail(email);
+    }
+
+    @Override
+    public void deleteAll() {
+        repository.deleteAll();
     }
 }
