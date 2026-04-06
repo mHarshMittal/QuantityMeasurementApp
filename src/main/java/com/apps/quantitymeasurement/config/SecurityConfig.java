@@ -29,10 +29,10 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
-                // ✅ Disable CSRF (best for JWT)
+                //  Disable CSRF (best for JWT)
                 .csrf(csrf -> csrf.disable())
 
-                // ✅ Allow H2 console in browser (iframe)
+                //  Allow H2 console in browser (iframe)
                 .headers(headers -> headers
                         .frameOptions(frame -> frame.disable())
                 )
@@ -50,7 +50,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
 
-                // ✅ JWT filter
+                //  JWT filter
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
