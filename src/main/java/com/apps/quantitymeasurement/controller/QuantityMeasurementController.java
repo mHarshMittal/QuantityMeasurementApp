@@ -5,6 +5,7 @@ import com.apps.quantitymeasurement.entity.QuantityMeasurementEntity;
 import com.apps.quantitymeasurement.service.IQuantityMeasurementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,8 +47,17 @@ public class QuantityMeasurementController {
         return ResponseEntity.ok(service.divide(userId, input));
     }
 
+    @PostMapping("/multiply/{userId}")
+    public ResponseEntity<QuantityMeasurementEntity> multiply(@PathVariable Long userId,
+                                                              @RequestBody QuantityInputDTO input) {
+        return ResponseEntity.ok(service.multiply(userId, input));
+    }
+
     @GetMapping("/history")
-    public ResponseEntity<List<QuantityMeasurementEntity>> getHistory() {
+    public ResponseEntity<List<QuantityMeasurementEntity>> getHistory(Authentication authentication) {
+        if (authentication != null) {
+            return ResponseEntity.ok(service.getHistoryByEmail(authentication.getName()));
+        }
         return ResponseEntity.ok(service.getHistory());
     }
 
@@ -59,5 +69,21 @@ public class QuantityMeasurementController {
     @GetMapping("/count/{operation}")
     public ResponseEntity<Long> getOperationCount(@PathVariable String operation) {
         return ResponseEntity.ok(service.getOperationCount(operation));
+    }
+
+    @DeleteMapping("/history/{id}")
+    public ResponseEntity<Void> deleteRecord(@PathVariable Long id) {
+        service.deleteRecord(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/history")
+    public ResponseEntity<Void> deleteAll(Authentication authentication) {
+        if (authentication != null) {
+            service.deleteAllByEmail(authentication.getName());
+        } else {
+            service.deleteAll();
+        }
+        return ResponseEntity.noContent().build();
     }
 }
