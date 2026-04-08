@@ -1,81 +1,127 @@
-# QuantityMeasurementApp  ->  19 Jan, 2026
+# Quantity Measurement App — Microservices Architecture
 
+## Architecture Overview
 
- Daily Progress
+```
+Browser (React Frontend — port 3000)
+              │
+              ▼
+  ┌─────────────────────┐
+  │   API Gateway       │  ← port 8080  (single entry point)
+  │   (Spring Boot)     │
+  └──────────┬──────────┘
+             │ routes to:
+    ┌────────┼──────────────────────┐
+    ▼        ▼                      ▼
+┌───────┐ ┌──────────┐ ┌──────────────────────┐
+│ Auth  │ │  Admin   │ │  Quantity + History  │
+│ :8081 │ │  :8082   │ │  :8083     :8084     │
+└───────┘ └──────────┘ └──────────────────────┘
+```
 
+## Services
 
-- **UC-1** → feature/UC1-FeetEquality  
-  Implemented logic to compare measurements in feet  
+| Service          | Port | Responsibility                            |
+|------------------|------|-------------------------------------------|
+| api-gateway      | 8080 | Route requests, validate JWT              |
+| auth-service     | 8081 | Register, Login, JWT generation, Users    |
+| admin-service    | 8082 | User management, Stats dashboard          |
+| quantity-service | 8083 | Convert, Compare, Arithmetic operations   |
+| history-service  | 8084 | Persist & retrieve measurement history    |
+| frontend (React) | 3000 | UI (Vite + React)                         |
 
-- **UC-2** → feature/UC2-InchEquality  
-  Added comparison support for values in inches  
+## Prerequisites
 
+- Java 21+
+- Maven 3.8+
+- Node.js 18+ (for frontend)
 
+## Quick Start
 
-- **UC-3** → feature/UC3-GenericLength  
-  Created a generic quantity class to avoid code duplication  
+### Option 1 — Run each service manually (recommended for development)
 
-- **UC-4** → feature/UC4-YardEquality 
-  Added equality check support for yard units  
+Open **5 separate terminals** and run each:
 
+```bash
+# Terminal 1 — Auth Service
+cd auth-service
+mvn spring-boot:run
 
+# Terminal 2 — History Service
+cd history-service
+mvn spring-boot:run
 
-- **UC-5** → feature/UC5-UnitConversion  
-  Enabled conversion between different measurement units  
+# Terminal 3 — Quantity Service
+cd quantity-service
+mvn spring-boot:run
 
-- **UC-6** → feature/UC6-UnitAddition  
-  Implemented addition of two values with different units  
+# Terminal 4 — Admin Service
+cd admin-service
+mvn spring-boot:run
 
+# Terminal 5 — API Gateway
+cd api-gateway
+mvn spring-boot:run
 
+# Terminal 6 — Frontend
+cd frontend
+npm install
+npm run dev
+```
 
-- **UC-7** → feature/UC7-TargetUnitAddition  
-  Allowed addition with output in a specific target unit  
+### Option 2 — Use the startup script (Linux/Mac)
 
-- **UC-8** → feature/UC8-StandaloneUnit  
-  Refactored unit handling into a separate structure  
+```bash
+chmod +x start-all.sh stop-all.sh
+./start-all.sh
+# Then in a new terminal:
+cd frontend && npm install && npm run dev
+```
 
+## API Endpoints (via Gateway at port 8080)
 
+### Public (no auth required)
+- `POST /auth/register` — Register a new user
+- `POST /auth/login`    — Login, returns JWT token
 
-- **UC-9** → feature/UC9-WeightMeasurement  
-  Added support for weight measurements  
+### Protected (requires `Authorization: Bearer <token>` header)
+- `POST /api/v1/quantities/compare/{userId}`  — Compare two quantities
+- `POST /api/v1/quantities/convert/{userId}`  — Convert unit
+- `POST /api/v1/quantities/add/{userId}`      — Add quantities
+- `POST /api/v1/quantities/subtract/{userId}` — Subtract quantities
+- `POST /api/v1/quantities/multiply/{userId}` — Multiply quantity
+- `POST /api/v1/quantities/divide/{userId}`   — Divide quantities
+- `GET  /api/v1/quantities/history`           — Get user history
+- `GET  /api/v1/quantities/history/{op}`      — Get history by operation
+- `GET  /api/v1/quantities/count/{op}`        — Count operations
+- `DELETE /api/v1/quantities/history/{id}`    — Delete a record
+- `DELETE /api/v1/quantities/history`         — Delete all user history
 
-- **UC-10** → feature/UC10-GenericQuantity  
-  Enhanced generic class to support multiple measurement types  
+### Admin
+- `GET    /admin/users`     — List all users
+- `DELETE /admin/users/{id}`— Delete a user
+- `GET    /admin/stats`     — Operation statistics
+- `GET    /admin/history`   — All history records
 
+## Frontend
 
+The frontend is **100% unchanged** — it still points to `http://localhost:8080`
+(the API gateway), so it works exactly as before.
 
-- **UC-11** → feature/UC11-VolumeMeasurement
-  
-  Implemented volume comparison, conversion, and addition  
+The only addition is `src/api/admin.js` for the admin dashboard.
 
-- **UC-12** → feature/UC12-SubtractionDivision  
-  Added subtraction and division operations  
+## Database
 
+Each service uses its own H2 in-memory database:
+- `auth-service`    → `authdb` (users table)
+- `history-service` → `historydb` (quantity_measurements table)
 
+Data resets on each restart. To use persistent storage, change
+`spring.datasource.url` in each service's `application.properties`
+to a MySQL/PostgreSQL URL.
 
-- **UC-13** → feature/UC13-CentralizedArithmeticLogic  
-  Centralized arithmetic logic for better reusability  
+## Notes
 
-- **UC-14** → feature/UC14-TemperatureMeasurement  
-  Added temperature measurement with limited operations  
-
-
-
-- **UC-15** → feature/UC15-NTierArchitecture
-   
-  Refactored project into N-Tier architecture  
-
-
-
-- **UC-16** → feature/UC16-DatabaseIntegration
-  
-  Integrated database using JDBC for data persistence
-
-  
-- **UC-17** → feature/UC17-SpringIntegration
-    - Converted Project to Spring Boot
-
-
-- **UC-18** → feature/UC18-Authentication
-  
-  - Added JWT with Spring Security
+- All services share the same JWT secret (`quantimeasure-secret-key-2024-secure!!`)
+- The API Gateway validates tokens locally without calling Auth Service (for performance)
+- Services communicate via REST using Spring's `RestTemplate`
