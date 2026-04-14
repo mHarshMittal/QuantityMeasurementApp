@@ -6,14 +6,36 @@
   <component name="ChangeListManager">
     <list default="true" id="be4cd4ce-d30b-4211-8ab3-ee123583cf65" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/admin-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/history-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/history-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantity-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/quantity-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantity-service/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/quantity-service/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quantity-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/quantity-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/src/main/java/com/apps/admin/AdminServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/src/main/java/com/apps/admin/client/AuthClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/src/main/java/com/apps/admin/client/HistoryAdminClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/src/main/java/com/apps/admin/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/src/main/java/com/apps/admin/controller/AdminController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/src/main/java/com/apps/admin/dto/HistoryRecord.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/src/main/java/com/apps/admin/dto/UserDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/src/main/java/com/apps/admin/security/JwtFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/src/main/java/com/apps/admin/security/JwtUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/target/classes/com/apps/admin/AdminServiceApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/target/classes/com/apps/admin/client/AuthClient$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/target/classes/com/apps/admin/client/AuthClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/target/classes/com/apps/admin/client/HistoryAdminClient$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/target/classes/com/apps/admin/client/HistoryAdminClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/target/classes/com/apps/admin/config/SecurityConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/target/classes/com/apps/admin/controller/AdminController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/target/classes/com/apps/admin/dto/HistoryRecord.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/target/classes/com/apps/admin/dto/UserDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/target/classes/com/apps/admin/security/JwtFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/target/classes/com/apps/admin/security/JwtUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/start-all.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stop-all.sh" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,35 +49,43 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="3C4RFkpltwEgWGTnbzCHg1PcI5A" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHELLCHECK.PATH": "I do mind",
-    "Shell Script.start-all.sh.executor": "Run",
-    "git-widget-placeholder": "feature/UC21-Microservices",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/harsh mittal/Desktop/microservices",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHELLCHECK.PATH&quot;: &quot;I do mind&quot;,
+    &quot;Shell Script.start-all.sh.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/UC21-Microservices&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/QuantityMeasurementApp&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="quantity-measurement" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="admin-service" />
+      <option name="filePath" />
+      <method v="2" />
     </configuration>
     <configuration name="start-all.sh" type="ShConfigurationType">
       <option name="SCRIPT_TEXT" value="" />
@@ -92,6 +122,9 @@
       <workItem from="1775714540702" duration="4780000" />
       <workItem from="1775722278502" duration="7000" />
       <workItem from="1775728188490" duration="63000" />
+      <workItem from="1776145646204" duration="10000" />
+      <workItem from="1776145733821" duration="1212000" />
+      <workItem from="1776147032976" duration="1310000" />
     </task>
     <servers />
   </component>

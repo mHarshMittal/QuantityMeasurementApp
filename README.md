@@ -11,12 +11,12 @@ Browser (React Frontend — port 3000)
   │   (Spring Boot)     │
   └──────────┬──────────┘
              │ routes to:
-    ┌────────┼──────────────────────┐
-    ▼        ▼                      ▼
-┌───────┐ ┌──────────┐ ┌──────────────────────┐
-│ Auth  │ │  Admin   │ │  Quantity + History  │
-│ :8081 │ │  :8082   │ │  :8083     :8084     │
-└───────┘ └──────────┘ └──────────────────────┘
+    ┌──────────────────────┐
+    ▼                      ▼
+┌───────┐       ┌──────────────────────┐
+│ Auth  │       │  Quantity + History  │
+│ :8081 │       │  :8083     :8084     │
+└───────┘       └──────────────────────┘
 ```
 
 ## Services
@@ -25,16 +25,11 @@ Browser (React Frontend — port 3000)
 |------------------|------|-------------------------------------------|
 | api-gateway      | 8080 | Route requests, validate JWT              |
 | auth-service     | 8081 | Register, Login, JWT generation, Users    |
-| admin-service    | 8082 | User management, Stats dashboard          |
 | quantity-service | 8083 | Convert, Compare, Arithmetic operations   |
 | history-service  | 8084 | Persist & retrieve measurement history    |
 | frontend (React) | 3000 | UI (Vite + React)                         |
 
-## Prerequisites
 
-- Java 21+
-- Maven 3.8+
-- Node.js 18+ (for frontend)
 
 ## Quick Start
 
@@ -69,14 +64,6 @@ npm install
 npm run dev
 ```
 
-### Option 2 — Use the startup script (Linux/Mac)
-
-```bash
-chmod +x start-all.sh stop-all.sh
-./start-all.sh
-# Then in a new terminal:
-cd frontend && npm install && npm run dev
-```
 
 ## API Endpoints (via Gateway at port 8080)
 
@@ -97,18 +84,9 @@ cd frontend && npm install && npm run dev
 - `DELETE /api/v1/quantities/history/{id}`    — Delete a record
 - `DELETE /api/v1/quantities/history`         — Delete all user history
 
-### Admin
-- `GET    /admin/users`     — List all users
-- `DELETE /admin/users/{id}`— Delete a user
-- `GET    /admin/stats`     — Operation statistics
-- `GET    /admin/history`   — All history records
 
-## Frontend
 
-The frontend is **100% unchanged** — it still points to `http://localhost:8080`
-(the API gateway), so it works exactly as before.
 
-The only addition is `src/api/admin.js` for the admin dashboard.
 
 ## Database
 
@@ -123,5 +101,4 @@ to a MySQL/PostgreSQL URL.
 ## Notes
 
 - All services share the same JWT secret (`quantimeasure-secret-key-2024-secure!!`)
-- The API Gateway validates tokens locally without calling Auth Service (for performance)
-- Services communicate via REST using Spring's `RestTemplate`
+
