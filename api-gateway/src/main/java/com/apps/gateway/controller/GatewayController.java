@@ -27,9 +27,6 @@ public class GatewayController {
     @Value("${history.service.url}")
     private String historyUrl;
 
-    @Value("${admin.service.url}")
-    private String adminUrl;
-
     private static final List<String> PUBLIC_PATHS = Arrays.asList(
             "/auth/login", "/auth/register", "/", "/error"
     );
@@ -38,7 +35,8 @@ public class GatewayController {
         this.jwtUtil = jwtUtil;
     }
 
-    // HOME
+    // ================= HOME =================
+
     @GetMapping("/")
     public Mono<ResponseEntity<Object>> home() {
         return Mono.just(ResponseEntity.ok(Map.of(
@@ -47,8 +45,7 @@ public class GatewayController {
                 "services", Map.of(
                         "auth", "http://localhost:8081",
                         "quantity", "http://localhost:8083",
-                        "history", "http://localhost:8084",
-                        "admin", "http://localhost:8082"
+                        "history", "http://localhost:8084"
                 )
         )));
     }
@@ -83,10 +80,12 @@ public class GatewayController {
         if (!isAuthenticated(exchange))
             return unauthorized();
 
-        return forward(HttpMethod.POST,
+        return forward(
+                HttpMethod.POST,
                 quantityUrl + "/api/v1/quantities/" + operation + "/" + userId,
                 body,
-                getAuth(exchange));
+                getAuth(exchange)
+        );
     }
 
     // ================= HISTORY =================
@@ -119,8 +118,9 @@ public class GatewayController {
     }
 
     @GetMapping("/api/v1/quantities/count/{operation}")
-    public Mono<ResponseEntity<Object>> getCount(@PathVariable String operation,
-                                                 ServerWebExchange exchange) {
+    public Mono<ResponseEntity<Object>> getCount(
+            @PathVariable String operation,
+            ServerWebExchange exchange) {
 
         if (!isAuthenticated(exchange))
             return unauthorized();
@@ -132,8 +132,9 @@ public class GatewayController {
     }
 
     @DeleteMapping("/api/v1/quantities/history/{id}")
-    public Mono<ResponseEntity<Object>> deleteById(@PathVariable Long id,
-                                                   ServerWebExchange exchange) {
+    public Mono<ResponseEntity<Object>> deleteById(
+            @PathVariable Long id,
+            ServerWebExchange exchange) {
 
         if (!isAuthenticated(exchange))
             return unauthorized();
@@ -142,30 +143,6 @@ public class GatewayController {
                 historyUrl + "/history/" + id,
                 null,
                 getAuth(exchange));
-    }
-
-    // ================= ADMIN =================
-
-    @GetMapping("/admin/**")
-    public Mono<ResponseEntity<Object>> adminGet(ServerWebExchange exchange) {
-
-        if (!isAuthenticated(exchange))
-            return unauthorized();
-
-        String path = exchange.getRequest().getURI().getPath();
-
-        return forward(HttpMethod.GET, adminUrl + path, null, getAuth(exchange));
-    }
-
-    @DeleteMapping("/admin/**")
-    public Mono<ResponseEntity<Object>> adminDelete(ServerWebExchange exchange) {
-
-        if (!isAuthenticated(exchange))
-            return unauthorized();
-
-        String path = exchange.getRequest().getURI().getPath();
-
-        return forward(HttpMethod.DELETE, adminUrl + path, null, getAuth(exchange));
     }
 
     // ================= HELPERS =================
@@ -195,10 +172,11 @@ public class GatewayController {
                 .body(Map.of("message", "Unauthorized")));
     }
 
-    private Mono<ResponseEntity<Object>> forward(HttpMethod method,
-                                                 String url,
-                                                 Object body,
-                                                 String authHeader) {
+    private Mono<ResponseEntity<Object>> forward(
+            HttpMethod method,
+            String url,
+            Object body,
+            String authHeader) {
 
         return webClient
                 .method(method)
