@@ -1,21 +1,21 @@
 package com.apps.gateway.controller;
 
 import com.apps.gateway.filter.JwtUtil;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class GatewayController {
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final WebClient webClient = WebClient.create();
     private final JwtUtil jwtUtil;
 
     @Value("${auth.service.url}")
@@ -31,148 +31,189 @@ public class GatewayController {
     private String adminUrl;
 
     private static final List<String> PUBLIC_PATHS = Arrays.asList(
-        "/auth/login", "/auth/register", "/", "/error"
+            "/auth/login", "/auth/register", "/", "/error"
     );
 
     public GatewayController(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
     }
 
+    // HOME
     @GetMapping("/")
-    public ResponseEntity<?> home() {
-        return ResponseEntity.ok(java.util.Map.of(
-            "status", "UP",
-            "message", "API Gateway is running",
-            "services", java.util.Map.of(
-                "auth", "http://localhost:8081",
-                "quantity", "http://localhost:8083",
-                "history", "http://localhost:8084",
-                "admin", "http://localhost:8082"
-            )
-        ));
+    public Mono<ResponseEntity<Object>> home() {
+        return Mono.just(ResponseEntity.ok(Map.of(
+                "status", "UP",
+                "message", "API Gateway is running",
+                "services", Map.of(
+                        "auth", "http://localhost:8081",
+                        "quantity", "http://localhost:8083",
+                        "history", "http://localhost:8084",
+                        "admin", "http://localhost:8082"
+                )
+        )));
     }
 
-    // ── AUTH routes (public) ──────────────────────────────────────────────────
+    // ================= AUTH =================
+
     @PostMapping("/auth/register")
-    public ResponseEntity<Object> register(@RequestBody Object body) {
+    public Mono<ResponseEntity<Object>> register(@RequestBody Object body) {
         return forward(HttpMethod.POST, authUrl + "/auth/register", body, null);
     }
 
     @PostMapping("/auth/login")
-    public ResponseEntity<Object> login(@RequestBody Object body) {
+    public Mono<ResponseEntity<Object>> login(@RequestBody Object body) {
         return forward(HttpMethod.POST, authUrl + "/auth/login", body, null);
     }
 
     @GetMapping("/auth/validate")
-    public ResponseEntity<Object> validate(HttpServletRequest request) {
-        String auth = request.getHeader("Authorization");
+    public Mono<ResponseEntity<Object>> validate(ServerWebExchange exchange) {
+        String auth = exchange.getRequest().getHeaders().getFirst("Authorization");
         return forward(HttpMethod.GET, authUrl + "/auth/validate", null, auth);
     }
 
-    // ── QUANTITY routes (protected) ───────────────────────────────────────────
+    // ================= QUANTITY =================
+
     @PostMapping("/api/v1/quantities/{operation}/{userId}")
-    public ResponseEntity<Object> quantityOp(@PathVariable String operation,
-                                              @PathVariable Long userId,
-                                              @RequestBody Object body,
-                                              HttpServletRequest request) {
-        if (!isAuthenticated(request))
-            return ResponseEntity.status(401).body(java.util.Map.of("message", "Unauthorized"));
-        return forward(HttpMethod.POST, quantityUrl + "/api/v1/quantities/" + operation + "/" + userId, body,
-                       request.getHeader("Authorization"));
+    public Mono<ResponseEntity<Object>> quantityOp(
+            @PathVariable String operation,
+            @PathVariable Long userId,
+            @RequestBody Object body,
+            ServerWebExchange exchange) {
+
+        if (!isAuthenticated(exchange))
+            return unauthorized();
+
+        return forward(HttpMethod.POST,
+                quantityUrl + "/api/v1/quantities/" + operation + "/" + userId,
+                body,
+                getAuth(exchange));
     }
 
-    // ── HISTORY routes (protected) ────────────────────────────────────────────
+    // ================= HISTORY =================
+
     @GetMapping("/api/v1/quantities/history")
-    public ResponseEntity<Object> getHistory(HttpServletRequest request) {
-        if (!isAuthenticated(request))
-            return ResponseEntity.status(401).body(java.util.Map.of("message", "Unauthorized"));
-        String email = extractEmail(request);
+    public Mono<ResponseEntity<Object>> getHistory(ServerWebExchange exchange) {
+
+        if (!isAuthenticated(exchange))
+            return unauthorized();
+
+        String email = extractEmail(exchange);
         String url = historyUrl + "/history" + (email != null ? "?email=" + email : "");
-        return forward(HttpMethod.GET, url, null, request.getHeader("Authorization"));
+
+        return forward(HttpMethod.GET, url, null, getAuth(exchange));
     }
 
     @GetMapping("/api/v1/quantities/history/{operation}")
-    public ResponseEntity<Object> getHistoryByOp(@PathVariable String operation,
-                                                   HttpServletRequest request) {
-        if (!isAuthenticated(request))
-            return ResponseEntity.status(401).body(java.util.Map.of("message", "Unauthorized"));
-        String email = extractEmail(request);
-        String url = historyUrl + "/history/operation/" + operation + (email != null ? "?email=" + email : "");
-        return forward(HttpMethod.GET, url, null, request.getHeader("Authorization"));
+    public Mono<ResponseEntity<Object>> getHistoryByOp(
+            @PathVariable String operation,
+            ServerWebExchange exchange) {
+
+        if (!isAuthenticated(exchange))
+            return unauthorized();
+
+        String email = extractEmail(exchange);
+        String url = historyUrl + "/history/operation/" + operation +
+                (email != null ? "?email=" + email : "");
+
+        return forward(HttpMethod.GET, url, null, getAuth(exchange));
     }
 
     @GetMapping("/api/v1/quantities/count/{operation}")
-    public ResponseEntity<Object> getCount(@PathVariable String operation, HttpServletRequest request) {
-        if (!isAuthenticated(request))
-            return ResponseEntity.status(401).body(java.util.Map.of("message", "Unauthorized"));
-        return forward(HttpMethod.GET, historyUrl + "/history/count/" + operation, null,
-                       request.getHeader("Authorization"));
+    public Mono<ResponseEntity<Object>> getCount(@PathVariable String operation,
+                                                 ServerWebExchange exchange) {
+
+        if (!isAuthenticated(exchange))
+            return unauthorized();
+
+        return forward(HttpMethod.GET,
+                historyUrl + "/history/count/" + operation,
+                null,
+                getAuth(exchange));
     }
 
     @DeleteMapping("/api/v1/quantities/history/{id}")
-    public ResponseEntity<Object> deleteById(@PathVariable Long id, HttpServletRequest request) {
-        if (!isAuthenticated(request))
-            return ResponseEntity.status(401).body(java.util.Map.of("message", "Unauthorized"));
-        return forward(HttpMethod.DELETE, historyUrl + "/history/" + id, null,
-                       request.getHeader("Authorization"));
+    public Mono<ResponseEntity<Object>> deleteById(@PathVariable Long id,
+                                                   ServerWebExchange exchange) {
+
+        if (!isAuthenticated(exchange))
+            return unauthorized();
+
+        return forward(HttpMethod.DELETE,
+                historyUrl + "/history/" + id,
+                null,
+                getAuth(exchange));
     }
 
-    @DeleteMapping("/api/v1/quantities/history")
-    public ResponseEntity<Object> deleteAll(HttpServletRequest request) {
-        if (!isAuthenticated(request))
-            return ResponseEntity.status(401).body(java.util.Map.of("message", "Unauthorized"));
-        String email = extractEmail(request);
-        String url = historyUrl + "/history" + (email != null ? "?email=" + email : "");
-        return forward(HttpMethod.DELETE, url, null, request.getHeader("Authorization"));
-    }
+    // ================= ADMIN =================
 
-    // ── ADMIN routes (protected) ──────────────────────────────────────────────
     @GetMapping("/admin/**")
-    public ResponseEntity<Object> adminGet(HttpServletRequest request) {
-        if (!isAuthenticated(request))
-            return ResponseEntity.status(401).body(java.util.Map.of("message", "Unauthorized"));
-        String path = request.getRequestURI();
-        return forward(HttpMethod.GET, adminUrl + path, null, request.getHeader("Authorization"));
+    public Mono<ResponseEntity<Object>> adminGet(ServerWebExchange exchange) {
+
+        if (!isAuthenticated(exchange))
+            return unauthorized();
+
+        String path = exchange.getRequest().getURI().getPath();
+
+        return forward(HttpMethod.GET, adminUrl + path, null, getAuth(exchange));
     }
 
     @DeleteMapping("/admin/**")
-    public ResponseEntity<Object> adminDelete(HttpServletRequest request) {
-        if (!isAuthenticated(request))
-            return ResponseEntity.status(401).body(java.util.Map.of("message", "Unauthorized"));
-        String path = request.getRequestURI();
-        return forward(HttpMethod.DELETE, adminUrl + path, null, request.getHeader("Authorization"));
+    public Mono<ResponseEntity<Object>> adminDelete(ServerWebExchange exchange) {
+
+        if (!isAuthenticated(exchange))
+            return unauthorized();
+
+        String path = exchange.getRequest().getURI().getPath();
+
+        return forward(HttpMethod.DELETE, adminUrl + path, null, getAuth(exchange));
     }
 
-    // ── Helpers ────────────────────────────────────────────────────────────────
-    private boolean isAuthenticated(HttpServletRequest request) {
-        String header = request.getHeader("Authorization");
+    // ================= HELPERS =================
+
+    private boolean isAuthenticated(ServerWebExchange exchange) {
+        String header = exchange.getRequest().getHeaders().getFirst("Authorization");
         if (header == null || !header.startsWith("Bearer ")) return false;
         return jwtUtil.isTokenValid(header.substring(7));
     }
 
-    private String extractEmail(HttpServletRequest request) {
-        String header = request.getHeader("Authorization");
-        if (header != null && header.startsWith("Bearer ")) {
-            try { return jwtUtil.extractUsername(header.substring(7)); } catch (Exception ignored) {}
-        }
+    private String extractEmail(ServerWebExchange exchange) {
+        String header = exchange.getRequest().getHeaders().getFirst("Authorization");
+        try {
+            if (header != null && header.startsWith("Bearer ")) {
+                return jwtUtil.extractUsername(header.substring(7));
+            }
+        } catch (Exception ignored) {}
         return null;
     }
 
-    @SuppressWarnings("unchecked")
-    private ResponseEntity<Object> forward(HttpMethod method, String url, Object body, String authHeader) {
-        try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            if (authHeader != null) headers.set("Authorization", authHeader);
+    private String getAuth(ServerWebExchange exchange) {
+        return exchange.getRequest().getHeaders().getFirst("Authorization");
+    }
 
-            HttpEntity<Object> entity = new HttpEntity<>(body, headers);
-            ResponseEntity<Object> response = restTemplate.exchange(url, method, entity, Object.class);
-            return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
-        } catch (HttpClientErrorException e) {
-            return ResponseEntity.status(e.getStatusCode()).body(e.getResponseBodyAsString());
-        } catch (Exception e) {
-            return ResponseEntity.status(503).body(java.util.Map.of(
-                "message", "Service unavailable: " + e.getMessage()));
-        }
+    private Mono<ResponseEntity<Object>> unauthorized() {
+        return Mono.just(ResponseEntity.status(401)
+                .body(Map.of("message", "Unauthorized")));
+    }
+
+    private Mono<ResponseEntity<Object>> forward(HttpMethod method,
+                                                 String url,
+                                                 Object body,
+                                                 String authHeader) {
+
+        return webClient
+                .method(method)
+                .uri(url)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .header(HttpHeaders.AUTHORIZATION,
+                        authHeader != null ? authHeader : "")
+                .bodyValue(body == null ? "" : body)
+                .retrieve()
+                .toEntity(Object.class)
+                .map(response -> ResponseEntity.status(response.getStatusCode())
+                        .body(response.getBody()))
+                .onErrorResume(e ->
+                        Mono.just(ResponseEntity.status(503)
+                                .body(Map.of("message", "Service unavailable: " + e.getMessage())))
+                );
     }
 }
