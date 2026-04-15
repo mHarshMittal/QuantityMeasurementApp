@@ -1,5 +1,0 @@
-com\apps\history\config\SecurityConfig.class
-com\apps\history\entity\QuantityMeasurementEntity.class
-com\apps\history\repository\HistoryRepository.class
-com\apps\history\controller\HistoryController.class
-com\apps\history\HistoryServiceApplication.class
