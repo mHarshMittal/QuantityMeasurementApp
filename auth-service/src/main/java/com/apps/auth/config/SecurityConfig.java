@@ -29,7 +29,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOriginPatterns(List.of("quantity-measurement-app-frontend-jade.vercel.app"));
+        config.setAllowedOriginPatterns(List.of("https://quantity-measurement-app-frontend-jade.vercel.app"));
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
