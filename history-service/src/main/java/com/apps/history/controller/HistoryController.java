@@ -26,7 +26,7 @@ public class HistoryController {
     public ResponseEntity<List<QuantityMeasurementEntity>> getAll(
             @RequestParam(required = false) String email) {
         if (email != null && !email.isEmpty()) {
-            return ResponseEntity.ok(repository.findByUserEmail(email));
+            return ResponseEntity.ok(repository.findByUserEmailOrderByCreatedAtDesc(email));
         }
         return ResponseEntity.ok(repository.findAll());
     }
@@ -36,13 +36,18 @@ public class HistoryController {
             @PathVariable String operation,
             @RequestParam(required = false) String email) {
         if (email != null && !email.isEmpty()) {
-            return ResponseEntity.ok(repository.findByUserEmailAndOperation(email, operation.toUpperCase()));
+            return ResponseEntity.ok(repository.findByUserEmailAndOperationOrderByCreatedAtDesc(email, operation.toUpperCase()));
         }
         return ResponseEntity.ok(repository.findByOperation(operation.toUpperCase()));
     }
 
     @GetMapping("/count/{operation}")
-    public ResponseEntity<Long> count(@PathVariable String operation) {
+    public ResponseEntity<Long> count(
+            @PathVariable String operation,
+            @RequestParam(required = false) String email) {
+        if (email != null && !email.isEmpty()) {
+            return ResponseEntity.ok(repository.countByUserEmailAndOperationAndErrorFalse(email, operation.toUpperCase()));
+        }
         return ResponseEntity.ok(repository.countByOperationAndErrorFalse(operation.toUpperCase()));
     }
 

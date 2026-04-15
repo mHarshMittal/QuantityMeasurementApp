@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,10 +31,6 @@ public class GatewayController {
 
     @Value("${admin.service.url:}")
     private String adminUrl;
-
-    private static final List<String> PUBLIC_PATHS = Arrays.asList(
-        "/auth/login", "/auth/register", "/", "/error"
-    );
 
     public GatewayController(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
@@ -86,7 +85,7 @@ public class GatewayController {
         if (!isAuthenticated(request))
             return ResponseEntity.status(401).body(java.util.Map.of("message", "Unauthorized"));
         String email = extractEmail(request);
-        String url = historyUrl + "/history" + (email != null ? "?email=" + email : "");
+        String url = historyUrl + "/history" + (email != null ? "?email=" + encodeEmail(email) : "");
         return forward(HttpMethod.GET, url, null, request.getHeader("Authorization"));
     }
 
@@ -97,7 +96,7 @@ public class GatewayController {
             return ResponseEntity.status(401).body(java.util.Map.of("message", "Unauthorized"));
         String email = extractEmail(request);
         String url = historyUrl + "/history/operation/" + operation
-                     + (email != null ? "?email=" + email : "");
+                     + (email != null ? "?email=" + encodeEmail(email) : "");
         return forward(HttpMethod.GET, url, null, request.getHeader("Authorization"));
     }
 
@@ -105,8 +104,10 @@ public class GatewayController {
     public ResponseEntity<Object> getCount(@PathVariable String operation, HttpServletRequest request) {
         if (!isAuthenticated(request))
             return ResponseEntity.status(401).body(java.util.Map.of("message", "Unauthorized"));
-        return forward(HttpMethod.GET, historyUrl + "/history/count/" + operation, null,
-                       request.getHeader("Authorization"));
+        String email = extractEmail(request);
+        String url = historyUrl + "/history/count/" + operation
+                     + (email != null ? "?email=" + encodeEmail(email) : "");
+        return forward(HttpMethod.GET, url, null, request.getHeader("Authorization"));
     }
 
     @DeleteMapping("/api/v1/quantities/history/{id}")
@@ -122,7 +123,7 @@ public class GatewayController {
         if (!isAuthenticated(request))
             return ResponseEntity.status(401).body(java.util.Map.of("message", "Unauthorized"));
         String email = extractEmail(request);
-        String url = historyUrl + "/history" + (email != null ? "?email=" + email : "");
+        String url = historyUrl + "/history" + (email != null ? "?email=" + encodeEmail(email) : "");
         return forward(HttpMethod.DELETE, url, null, request.getHeader("Authorization"));
     }
 
@@ -133,8 +134,7 @@ public class GatewayController {
             return ResponseEntity.status(401).body(java.util.Map.of("message", "Unauthorized"));
         if (adminUrl == null || adminUrl.isEmpty())
             return ResponseEntity.status(503).body(java.util.Map.of("message", "Admin service not configured"));
-        String path = request.getRequestURI();
-        return forward(HttpMethod.GET, adminUrl + path, null, request.getHeader("Authorization"));
+        return forward(HttpMethod.GET, adminUrl + request.getRequestURI(), null, request.getHeader("Authorization"));
     }
 
     @DeleteMapping("/admin/**")
@@ -143,8 +143,7 @@ public class GatewayController {
             return ResponseEntity.status(401).body(java.util.Map.of("message", "Unauthorized"));
         if (adminUrl == null || adminUrl.isEmpty())
             return ResponseEntity.status(503).body(java.util.Map.of("message", "Admin service not configured"));
-        String path = request.getRequestURI();
-        return forward(HttpMethod.DELETE, adminUrl + path, null, request.getHeader("Authorization"));
+        return forward(HttpMethod.DELETE, adminUrl + request.getRequestURI(), null, request.getHeader("Authorization"));
     }
 
     // ── Helpers ────────────────────────────────────────────────────────────────
@@ -162,12 +161,19 @@ public class GatewayController {
         return null;
     }
 
+    private String encodeEmail(String email) {
+        try {
+            return URLEncoder.encode(email, StandardCharsets.UTF_8.name());
+        } catch (UnsupportedEncodingException e) {
+            return email;
+        }
+    }
+
     private ResponseEntity<Object> forward(HttpMethod method, String url, Object body, String authHeader) {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             if (authHeader != null) headers.set("Authorization", authHeader);
-
             HttpEntity<Object> entity = new HttpEntity<>(body, headers);
             ResponseEntity<Object> response = restTemplate.exchange(url, method, entity, Object.class);
             return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
