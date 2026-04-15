@@ -20,7 +20,10 @@ public class HistoryClient {
     public HistoryRecord save(HistoryRecord record) {
         try {
             ResponseEntity<HistoryRecord> response = restTemplate.postForEntity(
-                historyServiceUrl + "/history/save", record, HistoryRecord.class);
+                    historyServiceUrl + "/api/v1/history/save",
+                    record,
+                    HistoryRecord.class
+            );
             return response.getBody();
         } catch (Exception e) {
             System.err.println("Failed to save history: " + e.getMessage());
