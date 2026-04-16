@@ -29,9 +29,9 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        // Frontend URL added here
-        config.setAllowedOrigins(List.of(
-                "https://quantity-measurement-app-frontend-cyhfe7k8g.vercel.app"
+        // Allow all Vercel deployments of your frontend
+        config.setAllowedOriginPatterns(List.of(
+                "https://quantity-measurement-app-frontend-*.vercel.app"
         ));
 
         config.setAllowedMethods(List.of(
@@ -40,7 +40,7 @@ public class SecurityConfig {
 
         config.setAllowedHeaders(List.of("*"));
 
-        // Required for cookies / auth headers
+        // Needed for cookies / auth headers
         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
