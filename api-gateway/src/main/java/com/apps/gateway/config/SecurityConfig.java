@@ -31,7 +31,7 @@ public class SecurityConfig {
 
         // Frontend URL added here
         config.setAllowedOrigins(List.of(
-                "https://quantity-measurement-app-frontend-jade.vercel.app"
+                "https://quantity-measurement-app-frontend-cyhfe7k8g.vercel.app"
         ));
 
         config.setAllowedMethods(List.of(
