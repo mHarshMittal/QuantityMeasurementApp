@@ -1,5 +1,6 @@
 package com.apps.history.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -31,6 +32,7 @@ public class QuantityMeasurementEntity {
     private boolean error;
     private String errorMessage;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdAt;
 
     @PrePersist
