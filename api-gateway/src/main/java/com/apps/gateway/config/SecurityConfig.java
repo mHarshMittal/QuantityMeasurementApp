@@ -31,6 +31,8 @@ public class SecurityConfig {
 
         // Allow all Vercel deployments of your frontend
         config.setAllowedOriginPatterns(List.of(
+                "http://localhost:3000",
+
                 "https://quantity-measurement-app-frontend-*.vercel.app"
         ));
 
