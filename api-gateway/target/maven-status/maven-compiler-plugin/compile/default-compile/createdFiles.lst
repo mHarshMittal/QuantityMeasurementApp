@@ -1,0 +1,4 @@
+com\apps\gateway\controller\GatewayController.class
+com\apps\gateway\config\SecurityConfig.class
+com\apps\gateway\filter\JwtUtil.class
+com\apps\gateway\ApiGatewayApplication.class
